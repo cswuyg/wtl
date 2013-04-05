@@ -13,6 +13,12 @@
       <UniqueIdentifier>{9ebbce2b-6051-4df8-be4a-fa3fbcd9a228}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;jpg;jpeg;jpe;manifest</Extensions>
     </Filter>
+    <Filter Include="utility">
+      <UniqueIdentifier>{6a83253d-48b7-4de1-b6ab-bf19371c3234}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="flash">
+      <UniqueIdentifier>{a4363b11-ac3a-43f0-b1f6-6e9c163af7a4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -20,6 +26,12 @@
     </ClCompile>
     <ClCompile Include="windemo.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="flash\flash.cpp">
+      <Filter>flash</Filter>
+    </ClCompile>
+    <ClCompile Include="utility\utility.cpp">
+      <Filter>utility</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -34,6 +46,12 @@
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="flash\flash.h">
+      <Filter>flash</Filter>
+    </ClInclude>
+    <ClInclude Include="utility\utility.h">
+      <Filter>utility</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

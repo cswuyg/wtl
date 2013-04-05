@@ -3,6 +3,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #pragma once
+#include "flash/flash.h"
 
 class CMainFrame : 
 	public CFrameWindowImpl<CMainFrame>, 
@@ -35,6 +36,8 @@ public:
 		CHAIN_MSG_MAP(CFrameWindowImpl<CMainFrame>)
 	END_MSG_MAP()
 
+	FlashPlay* flash_play_;
+
 // Handler prototypes (uncomment arguments if needed):
 //	LRESULT MessageHandler(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/)
 //	LRESULT CommandHandler(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
@@ -42,18 +45,25 @@ public:
 
 	LRESULT OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/)
 	{
-
 		// register object for message filtering and idle updates
 		CMessageLoop* pLoop = _Module.GetMessageLoop();
 		ATLASSERT(pLoop != NULL);
 		pLoop->AddMessageFilter(this);
 		pLoop->AddIdleHandler(this);
-
+		flash_play_ = new FlashPlay(m_hWnd);
+		flash_play_->CreateFlashPlay();
 		return 0;
 	}
 
 	LRESULT OnDestroy(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& bHandled)
 	{
+		if (flash_play_ != NULL)
+		{
+			flash_play_->Stop();
+			delete flash_play_;
+			flash_play_ = NULL;
+		}
+
 		// unregister message filtering and idle updates
 		CMessageLoop* pLoop = _Module.GetMessageLoop();
 		ATLASSERT(pLoop != NULL);
@@ -79,6 +89,7 @@ public:
 
 	LRESULT OnAppAbout(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 	{
+		flash_play_->Stop();
 		CAboutDlg dlg;
 		dlg.DoModal();
 		return 0;
